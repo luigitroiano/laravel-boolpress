@@ -10944,3 +10944,27 @@ a.text-dark:focus {
   }
 }
 
+.navbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  background: orangered;
+  border: 1px solid orangered;
+}
+
+.navbar a {
+  display: block;
+  flex-grow: 1;
+  padding: 1rem;
+  font-family: sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  color: lightyellow;
+}
+
+.navbar a:hover {
+  background: lightyellow;
+  color: orangered;
+}
+
