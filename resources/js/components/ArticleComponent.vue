@@ -2,11 +2,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
+                <div class="card" v-for="article in articles" :key="article.id">
+                    <div class="card-header">
+                        <h1>{{ article.title }}</h1>
+                    </div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        <p>{{ article.body }}</p>
+                        <span><strong>Tempo di lettura:</strong> {{ article.reading_time }} minuti ||</span>
+                        <span><strong>Autore:</strong> {{ article.author }} ||</span>
+                        <span><strong>Creato il:</strong> {{ new Date(article.created_at).toLocaleString('it')}}</span>
                     </div>
                 </div>
             </div>
@@ -18,6 +23,20 @@
     export default {
         mounted() {
             console.log('Component mounted.')
-        }
+            axios.get('api/articleList').then(response => {
+                this.articles = response.data.data;
+                console.log(this.articles);
+            });
+        },
+        data() {
+            return {
+                articles:"",
+            }
+        }    
     }
 </script>
+<style lang="scss" scoped>
+    .card{
+        margin: 15px 0;
+    }
+</style>
