@@ -23,3 +23,15 @@ Route::get('articleList', function ()
         'data' => App\Article::all()
     ],200);
 });
+
+Route::get('categoryList', function () {
+    return response()->json([
+        'data' => App\Category::all()
+    ], 200);
+});
+
+Route::get('tagList', function () {
+    return response()->json([
+        'data' => App\Tag::all()
+    ], 200);
+});

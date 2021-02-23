@@ -13,6 +13,8 @@
       <a href="{{ route('home') }}">Home</a>
       <a href="{{ route('article.index') }}">Articles</a>
       <a href="{{ route('articleList_api') }}">Articles API</a>
+      <a href="{{ route('categoryList_api') }}">Category API</a>
+      <a href="{{ route('tagList_api') }}">Tag API</a>
     </div>
   </nav>
   <main>

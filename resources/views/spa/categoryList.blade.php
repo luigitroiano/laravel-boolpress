@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title')
-  Article API
+  Category API
 @endsection
 @section('content')
 <div id="app">
-  <article-component></article-component>
+  <category-component></category-component>
 </div>
 @endsection
