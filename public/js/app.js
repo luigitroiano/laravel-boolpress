@@ -1986,10 +1986,25 @@ __webpack_require__.r(__webpack_exports__);
       _this.articles = response.data.data;
       console.log(_this.articles);
     });
+    axios.get('api/categoryList').then(function (response) {
+      _this.categories = response.data.data; //console.log(this.categories);
+
+      _this.articles.forEach(function (element) {
+        //console.log(element);
+        _this.categories.forEach(function (category) {
+          //console.log(category.id);
+          if (element.category_id == category.id) {
+            console.log(category.name);
+            Vue.set(element, "category_name", category.name);
+          }
+        });
+      });
+    });
   },
   data: function data() {
     return {
-      articles: ""
+      articles: "",
+      categories: ""
     };
   }
 });
@@ -38413,7 +38428,7 @@ var render = function() {
               _vm._v(" "),
               _c("span", [
                 _c("strong", [_vm._v("Categoria:")]),
-                _vm._v(" " + _vm._s(article.category_id) + " ||")
+                _vm._v(" " + _vm._s(article.category_name) + " ||")
               ]),
               _vm._v(" "),
               _c("span", [

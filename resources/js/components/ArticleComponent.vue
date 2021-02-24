@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <p>{{ article.body }}</p>
                         <span><strong>Tempo di lettura:</strong> {{ article.reading_time }} minuti ||</span>
-                        <span><strong>Categoria:</strong> {{ article.category_id }} ||</span>
+                        <span><strong>Categoria:</strong> {{ article.category_name }} ||</span>
                         <span><strong>Autore:</strong> {{ article.author }} ||</span>
                         <span><strong>Creato il:</strong> {{ new Date(article.created_at).toLocaleString('it')}}</span>
                     </div>
@@ -28,10 +28,25 @@
                 this.articles = response.data.data;
                 console.log(this.articles);
             });
+            axios.get('api/categoryList').then(response => {
+                this.categories = response.data.data;
+                //console.log(this.categories);
+                this.articles.forEach(element => {
+                    //console.log(element);
+                    this.categories.forEach(category=>{
+                        //console.log(category.id);
+                    if(element.category_id == category.id){
+                        console.log(category.name);
+                        Vue.set(element, "category_name", category.name);
+                    }
+                    })
+                });
+            });
         },
         data() {
             return {
                 articles:"",
+                categories:"",
             }
         }    
     }
