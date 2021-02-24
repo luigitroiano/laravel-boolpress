@@ -10,6 +10,7 @@
                     <div class="card-body">
                         <p>{{ article.body }}</p>
                         <span><strong>Tempo di lettura:</strong> {{ article.reading_time }} minuti ||</span>
+                        <span><strong>Categoria:</strong> {{ article.category_id }} ||</span>
                         <span><strong>Autore:</strong> {{ article.author }} ||</span>
                         <span><strong>Creato il:</strong> {{ new Date(article.created_at).toLocaleString('it')}}</span>
                     </div>

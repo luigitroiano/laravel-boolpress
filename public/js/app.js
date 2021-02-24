@@ -1976,6 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -38408,6 +38409,11 @@ var render = function() {
               _c("span", [
                 _c("strong", [_vm._v("Tempo di lettura:")]),
                 _vm._v(" " + _vm._s(article.reading_time) + " minuti ||")
+              ]),
+              _vm._v(" "),
+              _c("span", [
+                _c("strong", [_vm._v("Categoria:")]),
+                _vm._v(" " + _vm._s(article.category_id) + " ||")
               ]),
               _vm._v(" "),
               _c("span", [
