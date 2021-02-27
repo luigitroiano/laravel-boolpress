@@ -12,10 +12,11 @@ class CategorySeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 30; $i++) {
+        $category_list = config('categories');
+        foreach ($category_list as $value) {
             $newCategory = new Category();
-            $newCategory->name = $faker->word();
-            $newCategory->under18 = $faker->boolean();
+            $newCategory->name = $value['name'];
+            $newCategory->under18 = $value['under18'];
             $newCategory->save();
         }
     }

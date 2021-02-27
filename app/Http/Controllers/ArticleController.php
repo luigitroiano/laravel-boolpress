@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Tag;
+use App\Category;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::latest()->get();
         return view('article.index',compact('articles'));
     }
 
@@ -25,7 +27,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('article.create', compact('tags', 'categories'));
+
     }
 
     /**
@@ -36,7 +41,32 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $validation = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'subtitle' => 'required',
+            'author' => 'required',
+            'reading_time' => 'required',
+            'category_id' => 'required',
+            'tags' => 'exists:tags,id'
+        ]);
+        //dd($validation);
+        Article::create($validation);
+        $article = Article::orderBy('id', 'desc')->first();
+        $article->tags()->attach($request->tags);
+        
+        // $article = new Article;
+        // $article->title = request('title');
+        // $article->body = request('body');
+        // $article->subtitle = request('subtitle');
+        // $article->author = request('author');
+        // $article->reading_time = request('reading_time');
+        // $article->category = request('category');
+
+        //dd(request('title'), request('body'));
+        // $article->save();
+        return redirect()->route('article.index');
     }
 
     /**
@@ -47,7 +77,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('article.show', compact('article'));
     }
 
     /**
@@ -58,7 +88,10 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        $tags = Tag::all();
+        $categories = Category::all();
+
+        return view('article.edit', compact('article', 'tags', 'categories'));
     }
 
     /**
@@ -70,7 +103,18 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $validation = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'author' => 'required',
+            'reading_time' => 'required',
+            'category_id' => 'required',
+            'tags' => 'exists:tags,id'
+        ]);
+        $article->update($validation);
+        $article->tags()->sync($request->tags);
+        
+        return redirect()->route('article.index');
     }
 
     /**

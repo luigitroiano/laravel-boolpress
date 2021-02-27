@@ -12,9 +12,10 @@ class TagSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 30; $i++) {
+        $tag_list = config('tags');
+        foreach ($tag_list as $value){
             $newTag = new Tag();
-            $newTag->name = $faker->word();
+            $newTag->name = $value['name'];
             $newTag->views = $faker->randomNumber(6, true);
             $newTag->share = $faker->numberBetween(1000, 1000000);
             $newTag->save();
